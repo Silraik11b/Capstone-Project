@@ -1,1 +1,22 @@
+#import all the libraries we need
+import time
+#from scapy.all import sniff, IP, TCP
 
+#Welcome and explain the program
+print("Welcome to Py Snortlings 2.0!")
+print("This program will sniff packets on your network and alert you if it sees any anamolous activity.")
+print("It will suggest both snort and UFW rules to alert or block the traffic.")
+print("It can parse through pcap files or sniff live traffic.")
+print("---------------------------------------------------------")
+print("---------------------------------------------------------")
+
+#set the program to either sniff live or parse a pcap
+print("Do you want to sniff live traffic (L) or parse a pcap file (P)?")
+choice = input("Choice? (L/P): ")
+
+#Live Traffic sniffing code
+if choice == "L":
+    print("You chose to sniff live traffic.")
+    print("Please enter the interface you want to sniff on (e.g. eth0, wlan0):")
+    interface = input("Interface: ")
+    print("Sniffing on interface " + interface + "...")
