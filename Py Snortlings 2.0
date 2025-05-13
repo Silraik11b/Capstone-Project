@@ -1,6 +1,6 @@
 #import all the libraries we need
 import time
-#from scapy.all import sniff, IP, TCP
+from scapy.all import sniff, IP, TCP
 
 #Welcome and explain the program
 print("Welcome to Py Snortlings 2.0!")
