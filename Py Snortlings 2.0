@@ -72,3 +72,8 @@ if choice == "L":
     
     # Start sniffing
     sniff(filter="tcp", prn=detect_syn or detect_scan, store=0)
+
+#Pcap parsing 
+elif choice == "P":
+    pcap_file = input("Please enter the path to the pcap file: ")
+    print("Parsing file: " + pcap_file + "...")
