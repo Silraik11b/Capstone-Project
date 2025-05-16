@@ -38,7 +38,7 @@ def detect_dos(packet): #define a function named detect_syn(), takes packet as a
             # Format and print
             print("Current Date and Time:", now.strftime("%Y-%m-%d %H:%M:%S"))
             print(alert_msg)
-            logging.info(now.strftime("%Y-%m-%d %H:%M:%S"), alert_msg)
+            logging.info(alert_msg)
 
             # Alert if SYN flood threshold is exceeded. Monitors TCP SYN packets from any source to the home network.
 # Targets packets with SYN flag set (potential flood attempts).Triggers an alert if an IP sends more than 20 SYN packets in 1 second.
