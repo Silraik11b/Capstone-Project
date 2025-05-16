@@ -6,12 +6,14 @@ print("It can parse through pcap files or sniff live traffic.")
 print("---------------------------------------------------------")
 print("---------------------------------------------------------")
 
+
 from scapy.all import sniff, rdpcap, IP, TCP #import scapy modules
 import time #import time module to take care of  time lapse
 import logging #logging module, allowing you to track events, debug issues, and store alerts
+from datetime import datetime
 
 # Set up logging
-logging.basicConfig(filename="dos_alerts.log", level=logging.INFO) #sets up logging for your script, meaning all INFO-level messages (including alerts) will be stored in the "dos_alerts.log"
+logging.basicConfig(filename="dos_alerts.log", level=logging.INFO) #sets up logging for your script, meaning all INFO-level messages (including alerts) will be stored>
 
 syn_total = 0 #initialize global variable syn_count to 0. syn_count is used to count the number of SYN packets.
 start_time = time.time() #save current time into start_time variable.This is also a global variable.
@@ -27,29 +29,31 @@ def detect_dos(packet): #define a function named detect_syn(), takes packet as a
         syn_total += 1  # Track total SYN packets globally
         print("syncount: ", syn_total) #print total # of SYN packets encountered so far
 
-    if time.time() - start_time >= 1: # This line checks if at least 1 second has passed since the last reset (start_time). If so, it prints the number of detected SYN packets per second
+    if time.time() - start_time >= 1: # This line checks if at least 1 second has passed since the last reset (start_time). If so, it prints the number of detected SY>
         print(f"SYN packets detected: {syn_total}/sec")
         if syn_total > THRESHOLD:  #if total # of SYN packets per sec is > the threshold, print and log the alert message
-            alert_msg = f"🚨 Possible DDoS attack detected! Total SYN packets/sec: {syn_total} (Threshold: {THRESHOLD})"
+            alert_msg = f"🚨 Possible DoS attack detected! Total SYN packets/sec: {syn_total} (Threshold: {THRESHOLD})"
+            # Get current date and time
+            now = datetime.now()
+            # Format and print
+            print("Current Date and Time:", now.strftime("%Y-%m-%d %H:%M:%S"))
             print(alert_msg)
-            logging.info(alert_msg)
+            logging.info(now.strftime("%Y-%m-%d %H:%M:%S"), alert_msg)
 
-            # Suggested Snort Rule
-            timestamp=time.time()
-            print(timestamp)
             # Alert if SYN flood threshold is exceeded. Monitors TCP SYN packets from any source to the home network.
 # Targets packets with SYN flag set (potential flood attempts).Triggers an alert if an IP sends more than 20 SYN packets in 1 second.
 #sid:1000001 → Unique rule identifier.rev:1 → Revision number for the rule.
-            snort_rule = f'alert tcp any any -> $HOME_NET any (flags:S; msg:"Possible DDoS attack detected"; threshold: type threshold, count {syn_total}, seconds 1; sid:2000001; rev:1;)'
+            snort_rule = f'alert tcp any any -> $HOME_NET any (flags:S; msg:"Possible DDoS attack detected"; threshold: type threshold, count {syn_total}, seconds 1; >
             print(f"🔍 Suggested Snort Rule:\n{snort_rule}")
 
             # Suggested UFW Rule (Blocking excessive SYN traffic)
-            ufw_rule = "sudo ufw deny proto tcp from {packet[IP].src}"
+            ufw_rule = "sudo ufw limit proto tcp from any to any port 1013"
             print(f"🛡️ Suggested UFW Rule:\n{ufw_rule}")
 
         # Reset counter and timer
         syn_total = 0
         start_time = time.time()
+
 def analyze_pcap(file_path): #define a function to start analyzing a pcap file
 #    print("fun:", file_path) 
     packets = rdpcap(file_path) #Reads a PCAP file using rdpcap(file_path), loading all packets into a list.
