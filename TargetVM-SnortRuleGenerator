@@ -13,7 +13,8 @@ import logging #logging module, allowing you to track events, debug issues, and 
 from datetime import datetime
 
 # Set up logging
-logging.basicConfig(filename="dos_alerts.log", level=logging.INFO) #sets up logging for your script, meaning all INFO-level messages (including alerts) will be stored>
+logging.basicConfig(filename="dos_alerts.log", level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S") #sets up logging for your script, meaning all INFO-level messages (including alerts) will be stored in the "dos_alerts.log"
 
 syn_total = 0 #initialize global variable syn_count to 0. syn_count is used to count the number of SYN packets.
 start_time = time.time() #save current time into start_time variable.This is also a global variable.
