@@ -1,3 +1,3 @@
-# Capstone-Project
+#PySnortlings 2.0 Capstone-Project
 Fullstack Academy Final Project
-Write a program that captures network traffic and then suggests Snort rules to detect anomolies as well as UFW rules.
+Script that captures network traffic and then suggests Snort rules and UFW rules to the user if it detects SYN flood attack.
