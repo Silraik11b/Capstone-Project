@@ -1,0 +1,3 @@
+from scapy.all import sniff, wrpcap
+packets=sniff(count=10000, filter="tcp")
+wrpcap("testpcapfile.pcap",packets)
