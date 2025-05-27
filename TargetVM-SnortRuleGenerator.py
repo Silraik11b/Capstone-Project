@@ -54,7 +54,7 @@ def detect_syn_live(packet): #define a function named detect_syn_live(), takes p
             # Alert if SYN flood threshold is exceeded. Monitors TCP SYN packets from any source to the home network.
 # Targets packets with SYN flag set (potential flood attempts).Triggers an alert if an IP sends more than 20 SYN packets in 1 second.
 #sid:1000001 → Unique rule identifier.rev:1 → Revision number for the rule.
-            snort_rule = f'alert tcp any any -> $HOME_NET any (flags:S; msg:"Possible SYN flood attack detected"; threshold: type threshold, count {syn_total}, seconds 1;>
+            snort_rule = f'alert tcp any any -> $HOME_NET any (flags:S; msg:"Possible SYN flood attack detected"; threshold: type threshold, count {syn_total}, seconds 1;)'
             print(f"🔍 Suggested Snort Rule:\n{snort_rule}")
 
             # Suggested UFW Rule (Blocking excessive SYN traffic)
