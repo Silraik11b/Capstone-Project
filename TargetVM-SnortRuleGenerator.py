@@ -78,7 +78,7 @@ def analyze_pcap(file_path): #define a function to start analyzing a pcap file
 # alert message and log the message
         print(f"No: SYN packets per {ip}: {count} ")
         if count > THRESHOLD2:
-                alert_msg = f"🚨 Possible SYN flood detected from {ip}! Packets/sec: {count} (Threshold: {THRESHOLD2})(filename: {file_path})"
+                alert_msg = f"🚨 Possible SYN flood detected from {ip}! Packets: {count} (Threshold: {THRESHOLD2})(filename: {file_path})"
                 print(alert_msg)
                 logging.info(alert_msg)
 def start_live_capture(): # define a function to start sniffing on live packet capture
